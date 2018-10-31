@@ -1,8 +1,14 @@
 from lib import send_xml, xml_builder
 from lib.authentcation import Authentication
 
+"""
+Test
+
+"""
+
+
 class Ocip_lib:
-    '''
+    """
     Ocip_lib:
 
        ** A native python libirary to for Broadworks OCI-Provisioning API **
@@ -16,8 +22,9 @@ class Ocip_lib:
 
 
 
-    '''
-    def __init__(self,username,password,url):
+    """
+
+    def __init__(self, username, password, url):
         self.username = username
         self.password = password
         self.url = url
@@ -25,14 +32,24 @@ class Ocip_lib:
         self._builder_object = None
         self._send_obj = None
 
-
     def __login__(self):
         self._builder_object = xml_builder.Xml_builder()
         self._send_obj = send_xml.Send_xml()
-        nonce = self._send_obj.send(self._builder_object._create_xml("AuthenticationRequest",userId=self.username),self.url)['nonce']
+        nonce = self._send_obj.send(
+            self._builder_object._create_xml(
+                "AuthenticationRequest", userId=self.username
+            ),
+            self.url,
+        )["nonce"]
 
-        self._send_obj.send(self._builder_object._create_xml("LoginRequest14sp4", userId=self.username,
-                                                            signedPassword=Authentication.signed_password(self.password,nonce)), self.url)
+        self._send_obj.send(
+            self._builder_object._create_xml(
+                "LoginRequest14sp4",
+                userId=self.username,
+                signedPassword=Authentication.signed_password(self.password, nonce),
+            ),
+            self.url,
+        )
 
     def _ocip_timeout(self):
         pass
@@ -44,21 +61,37 @@ class Ocip_lib:
         else:
             return
 
-    def send(self,api_call,**kwargs):
+    def send(self, api_call, **kwargs):
+        """
+        Used to 'Send' a specific broadworks api request with it's arguments
+        :param api_call:
+        :param kwargs:
+        :return:
+        """
         self._logedin_check()
-        return self._send_obj.send(self._builder_object._create_xml(api_call,**kwargs), self.url)
+        return self._send_obj.send(
+            self._builder_object._create_xml(api_call, **kwargs), self.url
+        )
 
-    def send_raw_xml(self,xml):
+    def send_raw_xml(self, xml):
+        """
+        Gives the user the ability to send raw xml to the broadworks ocip api
+        :param xml:
+        :return:
+        """
         self._logedin_check()
-        return self._send_obj.send(xml,self.url)
+        return self._send_obj.send(xml, self.url)
 
     def supported_api_calls(self):
+        """
+        Currently unused
+        :return:
+        """
         pass
 
     def list_api_opts(self):
+        """
+        Currently unused
+        :return:
+        """
         pass
-
-
-
-
-
