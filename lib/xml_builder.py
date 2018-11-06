@@ -321,6 +321,9 @@ class Xml_builder:
                 "userId": None,
                 "order": ["userId"],
             },
+            "RoutingNEGetListRequest":{
+                "order":[],
+            }
         }
 
     def _create_xml(self, api_call, **kwargs):

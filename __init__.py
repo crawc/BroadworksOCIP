@@ -1,10 +1,7 @@
 from lib import send_xml, xml_builder
 from lib.authentcation import Authentication
 
-"""
-Test
-
-"""
+"""Test"""
 
 
 class Ocip_lib:
