@@ -13,7 +13,7 @@ x.protocol = "OCI"
 
 
 y = AuthenticationRequest()
-y.set_userId("aaronparfitt@thevoicefactory.co.uk")
+y.set_userId()
 
 #x.add_command()
 
